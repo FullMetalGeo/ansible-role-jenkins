@@ -71,7 +71,7 @@
 
 - name: Copy Job Configurations
   copy:
-    src: "{{ role_path }}/files/jobs/"
+    src: "{{ jenkins_job_configs }}"
     dest: "{{ jenkins_home }}/jobs"
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"

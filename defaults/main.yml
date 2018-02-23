@@ -16,53 +16,6 @@ jenkins_jar_location: /opt/jenkins-cli.jar
 jenkins_url_prefix: ""
 jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
 
-jenkins_plugins: 
-  - ansicolor
-  - ant
-  - amazon-ecs
-  - aws-credentials
-  - aws-java-sdk
-  - bouncycastle-api
-  - cloudbees-folder
-  - config-file-provider
-  - conditional-buildstep
-  - credentials-binding
-  - credentials
-  - display-url-api
-  - envinject-api
-  - envinject
-  - git-client
-  - git
-  - github-api
-  - github
-  - gradle
-  - handlebars
-  - jackson2-api
-  - javadoc
-  - job-dsl
-  - jquery
-  - junit
-  - mailer
-  - mapdb
-  - matrix-project
-  - maven-plugin
-  - momentjs
-  - node-iterator-api
-  - parameterized-trigger
-  - plain-credentials
-  - pipeline-model-definition
-  - pipeline-maven
-  - scm-api
-  - script-security
-  - ssh-credentials
-  - structs
-  - subversion
-  - token-macro
-  - workflow-cps
-  - workflow-scm-step
-  - workflow-step-api
-  - workflow-multibranch
-
 jenkins_plugins_state: present
 jenkins_plugin_updates_expiration: 86400
 jenkins_plugin_timeout: 30
