@@ -17,6 +17,12 @@
     line: 'JENKINS_HOME={{ jenkins_home }}'
   register: jenkins_home_config
 
+- name: Add jenkins user to docker group
+  user:
+    name: jenkins
+    append: yes
+    groups: docker
+
 - name: Immediately restart Jenkins on init config changes.
   service: name=jenkins state=restarted
   when: jenkins_init_prefix.changed
@@ -44,6 +50,34 @@
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0775
+
+- name: Copy custom init scripts
+  copy:
+    src: "{{ role_path }}/files/init.groovy.d/"
+    dest: "{{ jenkins_home }}/init.groovy.d/"
+    owner: "{{ jenkins_process_user }}"
+    group: "{{ jenkins_process_group }}"
+    mode: 0775
+  notify: restart jenkins
+
+- name: Copy custom java init script
+  template:
+    src: "{{ role_path }}/templates/java.groovy.j2"
+    dest: "{{ jenkins_home }}/init.groovy.d/java.groovy"
+    owner: "{{ jenkins_process_user }}"
+    group: "{{ jenkins_process_group }}"
+    mode: 0775
+  notify: restart jenkins
+
+- name: Copy Job Configurations
+  copy:
+    src: "{{ jenkins_job_configs }}"
+    dest: "{{ jenkins_home }}/jobs"
+    owner: "{{ jenkins_process_user }}"
+    group: "{{ jenkins_process_group }}"
+    mode: 0775
+  when: jenkins_job_configs is defined
+  notify: restart jenkins
 
 - name: Trigger handlers immediately in case Jenkins was installed
   meta: flush_handlers

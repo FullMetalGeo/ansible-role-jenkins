@@ -11,7 +11,7 @@
   blockinfile:
     path: "{{ jenkins_home }}/.aws/config" 
     state: present
-    user: "{{ jenkins_process_user }}"
+    owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0644
     create: yes
@@ -25,7 +25,7 @@
   blockinfile:  
     path: "{{ jenkins_home }}/.gitconfig"
     state: present
-    user: "{{ jenkins_process_user }}"
+    owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0644
     create: yes
