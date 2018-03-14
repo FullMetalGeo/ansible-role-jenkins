@@ -28,6 +28,9 @@
 # Configure Jenkins init settings.
 - include: settings.yml
 
+# Configure Codecommit
+  include: codecommit.yml
+
 # Make sure Jenkins starts, then configure Jenkins.
 - name: Ensure Jenkins is started and runs on startup.
   service: name=jenkins state=started enabled=yes
