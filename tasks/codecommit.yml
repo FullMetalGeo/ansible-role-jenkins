@@ -1,4 +1,12 @@
 ---
+- name: Create AWS Directory
+  file:
+    path: "{{ jenkins_home }}/.aws/"
+    state: directory
+    owner: "{{ jenkins_process_user }}"
+    group: "{{ jenkins_process_group }}"
+    mode: 0755
+
 - name: Configure AWS CLI
   blockinfile:
     path: "{{ jenkins_home }}/.aws/config" 
@@ -6,6 +14,7 @@
     user: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0644
+    create: yes
     block: |
       [default]
       region = {{ aws_region }}
@@ -19,6 +28,7 @@
     user: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0644
+    create: yes
     block: | 
       [credential]
         helper = !aws --profile CodeCommitProfile codecommit credential-helper $@
