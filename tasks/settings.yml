@@ -69,16 +69,6 @@
     mode: 0775
   notify: restart jenkins
 
-- name: Copy Job Configurations
-  copy:
-    src: "{{ jenkins_job_configs }}"
-    dest: "{{ jenkins_home }}/jobs"
-    owner: "{{ jenkins_process_user }}"
-    group: "{{ jenkins_process_group }}"
-    mode: 0775
-  when: jenkins_job_configs is defined
-  notify: restart jenkins
-
 - name: Trigger handlers immediately in case Jenkins was installed
   meta: flush_handlers
 
