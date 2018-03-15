@@ -1,7 +1,7 @@
 - name: Copy Jenkins-Backup Job
   copy:
     src: jobs/
-    dest: "{{ jenkins_home }}/jobs/jenkins-backup"
+    dest: "{{ jenkins_home }}/jobs"
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0775
