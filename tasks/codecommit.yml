@@ -29,7 +29,10 @@
     group: "{{ jenkins_process_group }}"
     mode: 0644
     create: yes
-    block: | 
+    block: |
+      [user]
+	name = Jenkins
+	email = jenkins@venicegeo.io
       [credential]
-        helper = !aws --profile CodeCommitProfile codecommit credential-helper $@
+        helper = !aws --profile default codecommit credential-helper $@
         UseHttpPath = true
