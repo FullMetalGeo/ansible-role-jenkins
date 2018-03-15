@@ -31,8 +31,8 @@
     create: yes
     block: |
       [user]
-	name = Jenkins
-	email = jenkins@venicegeo.io
+        name = Jenkins
+        email = jenkins@venicegeo.io
       [credential]
         helper = !aws --profile default codecommit credential-helper $@
         UseHttpPath = true
