@@ -12,20 +12,10 @@
         <artifactNumToKeep>-1</artifactNumToKeep>
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
-    <hudson.model.ParametersDefinitionProperty>
-      <parameterDefinitions>
-        <hudson.model.StringParameterDefinition>
-          <name>git_repo</name>
-          <description>CodeCommit or other git repository to backup configuration to</description>
-          <defaultValue></defaultValue>
-          <trim>false</trim>
-        </hudson.model.StringParameterDefinition>
-      </parameterDefinitions>
-    </hudson.model.ParametersDefinitionProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <canRoam>true</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <jdk>(System)</jdk>
@@ -44,10 +34,8 @@ if [ -d $JENKINS_HOME/.git ]; then
   cd $JENKINS_HOME
   git status
 else
-  cd $JENKINS_HOME
-  git init
-  git remote add origin ${params.git_repo}
-
+  echo &quot;Git Error, exiting&quot;
+  exit 1
 fi;
 
 # Move into the jenkins directory
@@ -81,4 +69,3 @@ git push origin master</command>
   <publishers/>
   <buildWrappers/>
 </project>
-
