@@ -43,10 +43,18 @@
     name: nginx
     state: restarted
 
+- name: Generate a Self Signed OpenSSL certificate
+  openssl_certificate:
+    path: "/etc/letsencrypt/live/{{ domain_name }}/fullchain.pem"
+    privatekey_path: "/etc/letsencrypt/live/{{ domain_name }}/private/privkey.pem"
+    csr_path: "/etc/letsencrypt/live/{{ domain_name }}/fullchain.pem"
+    provider: selfsigned
+
 - name: Create letsencrypt certificate
   shell: letsencrypt -n -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} --nginx
   args:
     creates: /etc/letsencrypt/live/{{ domain_name }}
+  tags: [ 'never', 'gen_certificate' ]
 
 - name: Generate dhparams
   shell: openssl dhparam -out /etc/nginx/dhparams.pem 2048
@@ -67,4 +75,4 @@
   cron:
     name: letsencrypt_renewal
     special_time: weekly
-    job: letsencrypt --renew certonly -n --nginx -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} && service nginx reload
+    job: letsencrypt renew && service nginx reload
