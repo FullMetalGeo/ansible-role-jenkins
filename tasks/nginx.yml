@@ -8,7 +8,7 @@
 
 - name: Ensure required directories exist
   file:
-    name: "{{ items }}"
+    name: "{{ item }}"
     state: directory
   with_items:
     - /var/www/letsencrypt
