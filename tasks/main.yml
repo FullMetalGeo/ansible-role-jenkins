@@ -64,3 +64,6 @@
 
 # Configure Jobs
 - include_tasks: jobs.yml
+
+# Configure nginx frontend
+- include_tasks: nginx.yml
