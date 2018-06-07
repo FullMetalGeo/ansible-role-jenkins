@@ -6,6 +6,11 @@
     - nginx
     - python2-certbot-nginx
 
+- name: Ensure pyopenssl is installed
+  pip:
+    name: pyopenssl
+    state: latest
+
 - name: Ensure SELinux boolean is set
   seboolean:
     name: httpd_can_network_connect
