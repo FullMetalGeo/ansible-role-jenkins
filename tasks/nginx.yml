@@ -6,6 +6,12 @@
     - nginx
     - python2-certbot-nginx
 
+- name: Ensure SELinux boolean is set
+  seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
+
 - name: Ensure required directories exist
   file:
     name: "{{ item }}"
