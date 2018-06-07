@@ -38,7 +38,7 @@
     state: restarted
 
 - name: Create letsencrypt certificate
-  shell: letsencrypt certonly -n --webroot -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }}
+  shell: letsencrypt -n -w /var/www/letsencrypt -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} --nginx
   args:
     creates: /etc/letsencrypt/live/{{ domain_name }}
 
