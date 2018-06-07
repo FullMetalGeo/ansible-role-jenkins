@@ -6,10 +6,13 @@
     - nginx
     - python2-certbot-nginx
 
-- name: create letsencrypt directory
+- name: Ensure required directories exist
   file:
-    name: /var/www/letsencrypt
+    name: "{{ items }}"
     state: directory
+  with_items:
+    - /var/www/letsencrypt
+    - /etc/nginx/sites-enabled
 
 - name: Remove default nginx config
   file:
