@@ -29,8 +29,8 @@
 
 - name: Install nginx site for letsencrypt requests
   template:
-    src: templates/nginx-http.j2
-    dest: /etc/nginx/sites-enabled/http
+    src: templates/nginx-letsencrypt.j2
+    dest: /etc/nginx/sites-enabled/letsencrypt
 
 - name: Reload nginx to activate letsencrypt site
   service:
@@ -49,8 +49,8 @@
 
 - name: Install nginx site for specified site
   template:
-    src: templates/nginx-le.j2
-    dest: /etc/nginx/sites-enabled/le
+    src: templates/nginx-jenkins.j2
+    dest: /etc/nginx/sites-enabled/jenkins
 
 - name: Reload nginx to activate specified site
   service:

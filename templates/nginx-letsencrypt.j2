@@ -8,8 +8,4 @@ server {
         root /var/www/letsencrypt;
         try_files $uri $uri/ =404;
     }
-
-    location / {
-        rewrite ^ https://{{ domain_name }}$request_uri? permanent;
-    }
 }
