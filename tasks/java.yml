@@ -24,4 +24,4 @@
     group: "{{ jenkins_process_group }}"
   with_items:
     - jdk-10.0.1_linux-x64_bin.tar.gz
-    - jdk-8u172-linux-x64.tag.gz
+    - jdk-8u172-linux-x64.tar.gz
