@@ -43,6 +43,7 @@
     privatekey_path: "/etc/letsencrypt/live/{{ domain_name }}/private/privkey.pem"
     csr_path: "/etc/letsencrypt/live/{{ domain_name }}/fullchain.pem"
     provider: selfsigned
+  ignore_errors: true
 
 - name: Create letsencrypt certificate
   shell: letsencrypt -n -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} --nginx
