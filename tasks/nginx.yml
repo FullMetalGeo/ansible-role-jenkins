@@ -39,6 +39,7 @@
 
 - name: create self-signed SSL cert
   command: "openssl req -new -nodes -x509 -subj /C=US/ST=Colorado/L=Westminster/O=IT/CN={{ domain_name }} -days 3650 -keyout /etc/letencrypt/live/{{ domain_name }}/private/privkey.pem -out /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem -extensions v3_ca"
+  ignore_errors: true
 
 - name: Create letsencrypt certificate
   shell: letsencrypt -n -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} --nginx
