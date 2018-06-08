@@ -38,12 +38,13 @@
 
 - name: create self-signed SSL cert
   command: "openssl req -new -nodes -x509 -subj /C=US/ST=Colorado/L=Westminster/O=IT/CN={{ domain_name }} -days 3650 -keyout /etc/letsencrypt/live/{{ domain_name }}/privkey.pem -out /etc/letsencrypt/live/{{ domain_name }}/fullchain.pem -extensions v3_ca"
+  tags: gen_self_signed_cert
 
 - name: Create letsencrypt certificate
   shell: letsencrypt -n -m {{ letsencrypt_email }} --agree-tos -d {{ domain_name }} --nginx
   args:
     creates: /etc/letsencrypt/live/{{ domain_name }}
-  tags: [ 'never', 'gen_certificate' ]
+  tags: gen_certificate
 
 - name: Generate dhparams
   shell: openssl dhparam -out /etc/nginx/dhparams.pem 2048
