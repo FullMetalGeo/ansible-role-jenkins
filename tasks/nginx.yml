@@ -21,11 +21,11 @@
   file:
     name: "{{ item }}"
     state: directory
-    owner: nginx
-    group: nginx
   with_items:
     - /etc/nginx/sites-enabled
     - /var/log/nginx
+    - "/etc/letsencrypt/live/{{ domain_name}}"
+    - "/etc/letsencrypt/live/{{ domain_name}}/private"
 
 - name: Remove default nginx config
   file:
