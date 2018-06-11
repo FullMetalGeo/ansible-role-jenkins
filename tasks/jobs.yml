@@ -1,11 +1,12 @@
 - name: Copy Jenkins-Backup Job
   copy:
-    src: jobs/
-    dest: "{{ jenkins_home }}/jobs"
+    src: config.xml
+    dest: "{{ jenkins_home }}/jobs/jenkins-backup/"
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0775
   notify: restart jenkins
+  when: create_backup_job
 
 - name: Copy Job Configurations
   copy:

@@ -37,4 +37,5 @@ jenkins_init_changes:
   - option: "{{ jenkins_java_options_env_var }}"
     value: "{{ jenkins_java_options }}"
 
-aws_region: us-east-1    
+aws_region: us-east-1
+create_backup_job: true
