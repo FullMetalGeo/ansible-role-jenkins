@@ -70,4 +70,4 @@
 
 # Configure nginx frontend
 - include_tasks: nginx.yml
-  tags: letsencrypt
+  tags: nginx
