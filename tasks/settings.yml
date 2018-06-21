@@ -70,6 +70,14 @@
     mode: 0775
   notify: restart jenkins
 
+- name: Create maven settings.xml file
+  template:
+    src: "{{ role_path }}/templates/settings.xml"
+    dest: "{{ jekins_home }}/.m2/settings.xml"
+    owner: "{{ jenkins_process_user }}"
+    group: "{{ jenkins_process_group }}"
+    mode: 0640
+
 - name: Trigger handlers immediately in case Jenkins was installed
   meta: flush_handlers
 

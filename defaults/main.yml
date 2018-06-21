@@ -39,3 +39,8 @@ jenkins_init_changes:
 
 aws_region: us-east-1
 create_backup_job: true
+
+nexus_id: nexus
+nexus_username: nexus
+nexus_password: nexus
+nexus_central_url: https://central
