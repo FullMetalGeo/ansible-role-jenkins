@@ -70,6 +70,14 @@
     mode: 0775
   notify: restart jenkins
 
+- name: Ensure maven .m2 directory exists
+  file:
+    state: directory
+    path: "{{ jenkins_home }}/.m2"
+    owner: "{{ jenkins_process_user }}"
+    group: "{{ jenkins_process_group }}"
+    mode: 0755
+
 - name: Create maven settings.xml file
   template:
     src: "{{ role_path }}/templates/settings.xml.j2"
