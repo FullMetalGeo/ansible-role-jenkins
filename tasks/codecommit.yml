@@ -9,7 +9,7 @@
 
 - name: Configure AWS CLI
   blockinfile:
-    path: "{{ jenkins_home }}/.aws/config" 
+    path: "{{ jenkins_home }}/.aws/config"
     state: present
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
@@ -20,9 +20,16 @@
       region = {{ aws_region }}
       output = json
 
+- name: Copy .gitignore
+  copy:
+    src: gitignore
+    dest: "{{ jenkins_home }}/.gitignore"
+    owner: "{{ jenkins_process_user }}"
+    group: "{{ jenkins_process_group }}"
+    mode: 0644
 
 - name: Configure Git
-  blockinfile:  
+  blockinfile:
     path: "{{ jenkins_home }}/.gitconfig"
     state: present
     owner: "{{ jenkins_process_user }}"

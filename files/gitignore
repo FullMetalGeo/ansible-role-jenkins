@@ -1,0 +1,61 @@
+# Non-config file types
+*.log
+*.log.*
+*.tmp
+*.old
+*.bak
+*.jar
+*.jpi
+*.jpi.pinned
+*.json
+
+# Security related
+/.ssh
+/secret.key*
+/secrets
+/identity.key
+
+# Generated Jenkins state
+/.owner
+/queue.xml
+/fingerprints/
+/shelvedProjects/
+/updates/
+
+# Tools that Jenkins manages
+/tools/
+/cache/
+
+# Extracted plugins
+/plugins/*/
+
+# Job state
+builds/
+workspace/
+lastStable
+lastSuccessful
+nextBuildNumber
+modules/
+
+# Interactive shell stuff
+.bash_history
+/.vim*
+.lesshst
+.Xauthority
+
+# Package cache
+/.gradle/caches
+/.ivy2/
+/.m2/
+/.node-gyp/
+/.npm/
+/.sbt/
+
+# TFS plugin
+/.microsoft
+
+# FOP cache
+/.fop
+
+# Fontconfig cache
+/.cache
