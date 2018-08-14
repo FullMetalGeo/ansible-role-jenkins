@@ -47,3 +47,8 @@ nexus_central_url: https://central
 
 jdk8_version: jdk-8u181
 jdk10_version: jdk-10.0.2
+
+sonar_name: sonar
+sonar_server_url: "https://sonarqube"
+sonar_auth_token: ""
+sonar_runner_version: "3.2.0.1227"
