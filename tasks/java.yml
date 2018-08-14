@@ -15,21 +15,16 @@
     group: "{{ jenkins_process_group }}"
     mode: u+rwx
 
-- name: Copy JDK 8 into place
+- name: Copy JDKs into place
   unarchive:
     remote_src: yes
-    src: "/tmp/{{ jdk8_version }}-linux-x64.tar.gz"
-    dest: "{{ jenkins_home }}/tools/{{ jdk8_version }}/"
+    src: "/tmp/{{ item }}"
+    dest: "{{ jenkins_home }}/tools"
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
-
-- name: Copy JDK 10 into place
-  unarchive:
-    remote_src: yes
-    src: "/tmp/{{ jdk10_version }}_linux-x64_bin.tar.gz"
-    dest: "{{ jenkins_home }}/tools/{{ jdk10_version }}/"
-    owner: "{{ jenkins_process_user }}"
-    group: "{{ jenkins_process_group }}"
+  with_items:
+    - "{{ jdk10_version }}_linux-x64_bin.tar.gz"
+    - "{{ jdk8_version }}-linux-x64.tar.gz"
 
 - name: Remove JDKs downloads
   file:
