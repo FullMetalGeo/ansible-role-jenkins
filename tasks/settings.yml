@@ -61,14 +61,17 @@
     mode: 0775
   notify: restart jenkins
 
-- name: Copy custom java init script
+- name: Template custom init scripts into place
   template:
-    src: "{{ role_path }}/templates/java.groovy.j2"
-    dest: "{{ jenkins_home }}/init.groovy.d/java.groovy"
+    src: "{{ role_path }}/templates/{{ item }}.j2"
+    dest: "{{ jenkins_home }}/init.groovy.d/{{ item }}"
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
     mode: 0775
   notify: restart jenkins
+  with_items:
+    - java.groovy
+    - sonarqube.groovy
 
 - name: Ensure maven .m2 directory exists
   file:
