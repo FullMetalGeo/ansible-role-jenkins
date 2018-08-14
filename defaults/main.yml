@@ -44,3 +44,6 @@ nexus_id: nexus
 nexus_username: nexus
 nexus_password: nexus
 nexus_central_url: https://central
+
+jdk8_version: jdk-8u181
+jdk10_version: jdk-10.0.2
