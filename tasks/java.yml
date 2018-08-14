@@ -23,13 +23,13 @@
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
   with_items:
-    - jdk-10.0.1_linux-x64_bin.tar.gz
-    - jdk-8u172-linux-x64.tar.gz
+    - jdk-10.0.2_linux-x64_bin.tar.gz
+    - jdk-8u181-linux-x64.tar.gz
 
 - name: Remove JDKs downloads
   file:
     path: "/tmp/{{ item }}"
     state: absent
   with_items:
-    - jdk-10.0.1_linux-x64_bin.tar.gz
-    - jdk-8u172-linux-x64.tar.gz
+    - jdk-10.0.2_linux-x64_bin.tar.gz
+    - jdk-8u181-linux-x64.tar.gz
