@@ -72,6 +72,8 @@
   with_items:
     - java.groovy
     - sonarqube.groovy
+    - slack.groovy
+    - credentials.groovy
 
 - name: Ensure maven .m2 directory exists
   file:
