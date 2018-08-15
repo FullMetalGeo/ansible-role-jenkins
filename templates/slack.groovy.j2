@@ -4,28 +4,40 @@
    Original Script:
      https://github.com/jenkinsci/slack-plugin/issues/23
  */
+if(!binding.hasVariable('slack_settings')) {
+    slack_settings = [
+      slackTeamDomain: '{{ slack_domain }}',
+      slackToken: '{{ slack_token }}',
+      slackRoom: '{{ slack_room }}',
+    ]
+}
+if(!(slack_settings instanceof Map)) {
+    throw new Exception('slack_settings must be a Map.')
+}
 
-import net.sf.json.JSONObject
+def slack = Jenkins.instance.getExtensionList('jenkins.plugins.slack.SlackNotifier$DescriptorImpl')[0]
 
-JSONObject formData = ['slack': ['tokenCredentialId': '']] as JSONObject
+boolean save = false
+String teamDomain = (slack_settings['teamDomain'])?:''
+String tokenCredentialId = (slack_settings['tokenCredentialId'])?:''
+String room = (slack_settings['room'])?:''
 
-def slack = Jenkins.instance.getExtensionList(
-  jenkins.plugins.slack.SlackNotifier.DescriptorImpl.class
-)[0]
-
-//valid tokens for testing in the jenkins-slack-plugin-test instance of slack.com
-def params = [
-  slackTeamDomain: '{{ slack_domain }}',
-  slackToken: '{{ slack_token }}',
-  slackRoom: '{{ slack_room }}',
-  slackBuildServerUrl: '',
-  slackSendAs: ''
-]
-
-def req = [
-  getParameter: { name -> params[name] }
-] as org.kohsuke.stapler.StaplerRequest
-slack.configure(req, formData)
-
-slack.save()
-println 'Slack global settings configured.'
+if(teamDomain != slack.teamDomain) {
+    slack.teamDomain = teamDomain
+    save = true
+}
+if(tokenCredentialId != slack.tokenCredentialId) {
+    slack.tokenCredentialId = tokenCredentialId
+    save = true
+}
+if(room != slack.room) {
+    slack.room = room
+    save = true
+}
+if(save) {
+    println 'Slack configured.'
+    slack.save()
+}
+else {
+    println 'Nothing changed.  Slack already configured.'
+}
