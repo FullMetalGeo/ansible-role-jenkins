@@ -4,6 +4,11 @@
    Original Script:
      https://github.com/jenkinsci/slack-plugin/issues/23
  */
+import jenkins.*
+import jenkins.model.*
+import hudson.*
+import hudson.model.*
+
 if(!binding.hasVariable('slack_settings')) {
     slack_settings = [
       slackTeamDomain: '{{ slack_domain }}',
