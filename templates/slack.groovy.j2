@@ -11,9 +11,10 @@ import hudson.model.*
 
 if(!binding.hasVariable('slack_settings')) {
     slack_settings = [
-      slackTeamDomain: '{{ slack_domain }}',
-      slackToken: '{{ slack_token }}',
-      slackRoom: '{{ slack_room }}',
+      baseUrl: '{{ slack_base_url }}',
+      teamDomain: '{{ slack_team_subdomain | default('') }}',
+      tokenCredentialId: '{{ slack_token_id }}',
+      room: '{{ slack_room }}',
     ]
 }
 if(!(slack_settings instanceof Map)) {
@@ -23,10 +24,15 @@ if(!(slack_settings instanceof Map)) {
 def slack = Jenkins.instance.getExtensionList('jenkins.plugins.slack.SlackNotifier$DescriptorImpl')[0]
 
 boolean save = false
+String baseUrl = (slack_settings['baseUrl'])?:''
 String teamDomain = (slack_settings['teamDomain'])?:''
 String tokenCredentialId = (slack_settings['tokenCredentialId'])?:''
 String room = (slack_settings['room'])?:''
 
+if(baseUrl != slack.baseUrl) {
+    slack.baseUrl = baseUrl
+    save = true
+}
 if(teamDomain != slack.teamDomain) {
     slack.teamDomain = teamDomain
     save = true

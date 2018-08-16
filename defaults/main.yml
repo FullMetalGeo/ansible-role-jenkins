@@ -52,3 +52,7 @@ sonar_name: sonar
 sonar_server_url: "https://sonarqube"
 sonar_auth_token: ""
 sonar_runner_version: "3.2.0.1227"
+
+slack_base_url: "https://myteam.slack.com"
+slack_token_id: slack-token
+slack_room: jenkins
