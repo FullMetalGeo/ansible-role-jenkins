@@ -70,3 +70,17 @@
   with_items: "{{ jenkins_plugins }}"
   when: jenkins_admin_token != ""
   notify: restart jenkins
+
+- name: Template custom init scripts into place
+  template:
+    src: "{{ role_path }}/templates/{{ item }}.j2"
+    dest: "{{ jenkins_home }}/init.groovy.d/{{ item }}"
+    owner: "{{ jenkins_process_user }}"
+    group: "{{ jenkins_process_group }}"
+    mode: 0775
+  notify: restart jenkins
+  with_items:
+    - java.groovy
+    - sonarqube.groovy
+    - slack.groovy
+    - credentials.groovy
