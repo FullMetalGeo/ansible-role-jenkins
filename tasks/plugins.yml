@@ -58,6 +58,8 @@
     with_dependencies: "{{ jenkins_plugins_install_dependencies }}"
   with_items: "{{ jenkins_plugins }}"
   when: jenkins_admin_password != ""
+  retries: 3
+  delay: 5
   notify: restart jenkins
 
 - name: Install Jenkins plugins using token.
@@ -69,6 +71,8 @@
     with_dependencies: "{{ jenkins_plugins_install_dependencies }}"
   with_items: "{{ jenkins_plugins }}"
   when: jenkins_admin_token != ""
+  retries: 3
+  delay: 5
   notify: restart jenkins
 
 - name: Template custom init scripts into place
