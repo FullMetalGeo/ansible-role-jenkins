@@ -1,11 +1,11 @@
 - name: Download Java JDKs
   get_url:
     url: "{{ item }}"
-    headers: "Cookie:oraclelicense=accept-securebackup-cookie"
+    headers:
+      Cookie: oraclelicense=accept-securebackup-cookie
     dest: /tmp
   with_items:
-    - http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz
-    - http://download.oracle.com/otn-pub/java/jdk/10.0.2+13/19aef61b38124481863b1413dce1855f/jdk-10.0.2_linux-x64_bin.tar.gz
+    - http://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.tar.gz
 
 - name: Ensure tools directory is present
   file:
@@ -23,7 +23,6 @@
     owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
   with_items:
-    - "{{ jdk10_version }}_linux-x64_bin.tar.gz"
     - "{{ jdk8_version }}-linux-x64.tar.gz"
 
 - name: Remove JDKs downloads
@@ -31,5 +30,4 @@
     path: "/tmp/{{ item }}"
     state: absent
   with_items:
-    - "{{ jdk10_version }}_linux-x64_bin.tar.gz"
     - "{{ jdk8_version }}-linux-x64.tar.gz"
