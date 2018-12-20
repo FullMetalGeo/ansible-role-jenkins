@@ -29,6 +29,7 @@
   pip:
     name: pyopenssl
     state: latest
+    executable: pip3
 
 - name: Ensure SELinux boolean is set
   seboolean:
