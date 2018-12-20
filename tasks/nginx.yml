@@ -1,10 +1,29 @@
-- name: Ensure nginx and letsencrypt are installed
-  package:
+- name: Add Certbot PPA (Ubuntu)
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  with_items:
+    - universe
+    - ppa:certbot/certbot
+  when: ansible_os_family == 'Debian'
+
+- name: Ensure nginx and letsencrypt are installed (Ubuntu)
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - nginx
+    - python-certbot-nginx
+  when: ansible_os_family == 'Debian'
+
+- name: Ensure nginx and letsencrypt are installed (RHEL)
+  yum:
     name: "{{ item }}"
     state: latest
   with_items:
     - nginx
     - python2-certbot-nginx
+  when: ansible_os_family == 'RedHat'
 
 - name: Ensure pyopenssl is installed
   pip:
