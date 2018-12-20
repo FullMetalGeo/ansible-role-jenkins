@@ -43,3 +43,15 @@
       [credential]
         helper = !aws --profile default codecommit credential-helper $@
         UseHttpPath = true
+      [credential "https://github.com/FullMetalGeo/radiant-beam"]
+        helper = store
+
+- name: Configure git-credentials
+  blockinfile:
+    path: "{{ jenkins_home }}/.git-credentials"
+    state: present
+    owner: "{{ jenkins_process_user }}"
+    group: "{{ jenkins_process_group }}"
+    mode: 0600
+    create: yes
+    block: "https://{{ github_username }}:{{ github_password }}@github.com/FullMetalGeo/radiant-beam"
