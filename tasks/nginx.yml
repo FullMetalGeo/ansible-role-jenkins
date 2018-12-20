@@ -3,7 +3,7 @@
     repo: "{{ item }}"
     state: present
   with_items:
-    - universe
+    #    - universe
     - ppa:certbot/certbot
   when: ansible_os_family == 'Debian'
 
