@@ -1,5 +1,5 @@
 - name: Ensure nginx and letsencrypt are installed
-  yum:
+  package:
     name: "{{ item }}"
     state: latest
   with_items:
@@ -16,6 +16,7 @@
     name: httpd_can_network_connect
     state: yes
     persistent: yes
+  when: ansible_os_family == 'RedHat'
 
 - name: Ensure required directories exist
   file:
