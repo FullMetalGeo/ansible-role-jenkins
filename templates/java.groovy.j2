@@ -7,7 +7,8 @@ def inst = Jenkins.getInstance()
 def desc = inst.getDescriptor("hudson.model.JDK")
 
 def versions = [
-  "JDK18": "{{ jenkins_home }}/tools/jdk1.8.0_191",
+  "JDK18": "{{ jenkins_home }}/tools/jdk8",
+  "JDK11": "{{ jenkins_home }}/tools/jdk11",
 ]
 def installations = [];
 

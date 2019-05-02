@@ -29,7 +29,7 @@
 - include_tasks: settings.yml
 
 # Install java tools
-- include_tasks: java.yml
+#- include_tasks: java.yml
 
 # Make sure Jenkins starts, then configure Jenkins.
 - name: Ensure Jenkins is started and runs on startup.
