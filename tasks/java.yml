@@ -6,6 +6,7 @@
     dest: /tmp
   with_items:
     - https://download.oracle.com/otn-pub/java/jdk/8u201-b09/42970487e3af4f5aa5bca3f542482c60/jdk-8u201-linux-x64.tar.gz
+    - https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.3%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.3_7.tar.gz
 
 - name: Ensure tools directory is present
   file:
@@ -24,6 +25,7 @@
     group: "{{ jenkins_process_group }}"
   with_items:
     - "{{ jdk8_version }}-linux-x64.tar.gz"
+    - "OpenJDK11U-jdk_x64_linux_hotspot_{{ jdk11_version }}.tar.gz"
 
 - name: Remove JDKs downloads
   file:
@@ -31,3 +33,4 @@
     state: absent
   with_items:
     - "{{ jdk8_version }}-linux-x64.tar.gz"
+    - "OpenJDK11U-jdk_x64_linux_hotspot_{{ jdk11_version }}.tar.gz"
