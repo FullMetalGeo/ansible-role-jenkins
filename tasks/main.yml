@@ -28,6 +28,12 @@
 # Configure Jenkins init settings.
 - include_tasks: settings.yml
 
+- name: Ensure tools directory exists
+  file:
+    path: "{{ jenkins_home }}/tools"
+    state: directory
+    mode: 0755
+
 # Install java tools
 #- include_tasks: java.yml
 
