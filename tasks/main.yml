@@ -33,7 +33,7 @@
     path: "{{ jenkins_home }}/tools"
     state: directory
     mode: 0755
-    user: "{{ jenkins_process_user }}"
+    owner: "{{ jenkins_process_user }}"
     group: "{{ jenkins_process_group }}"
 
 # Install java tools
