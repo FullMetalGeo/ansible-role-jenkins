@@ -3,6 +3,7 @@ import hudson.security.*
 import jenkins.model.*
 
 def instance = Jenkins.getInstance()
+instance.setInstallState(InstallState.INITIAL_SETUP_COMPLETED)
 def hudsonRealm = new HudsonPrivateSecurityRealm(false)
 def users = hudsonRealm.getAllUsers()
 users_s = users.collect { it.toString() }
